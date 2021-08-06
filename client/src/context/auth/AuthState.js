@@ -11,7 +11,7 @@ const initialState = {
     token: null
 };
 
-export const AuthContextProvider = (props) => {
+const AuthState = (props) => {
     const [state, dispatch] = useReducer(AuthReducer, initialState);
 
     // Login user
@@ -29,7 +29,7 @@ export const AuthContextProvider = (props) => {
                 payload: res.data
             })
 
-            loadUser();
+            // loadUser();
         } catch (err) {
             dispatch({
                 type: AUTH_FAIL
@@ -53,7 +53,7 @@ export const AuthContextProvider = (props) => {
                 payload: res.data
             })
 
-            loadUser();
+            // loadUser();
         } catch (err) {
             dispatch({
                 type: AUTH_FAIL
@@ -99,3 +99,5 @@ export const AuthContextProvider = (props) => {
         </AuthContext.Provider>
     )
 }
+
+export default AuthState;
