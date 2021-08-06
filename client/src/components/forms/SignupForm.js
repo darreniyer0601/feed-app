@@ -64,9 +64,11 @@ const SignupForm = (props) => {
                     onChange={handleChange}
 				/>
 			</div>
-			<button type="submit" className="btn btn-dark">
-				Sign Up
-			</button>
+			<div className="text-center">
+				<button type="submit" className="btn btn-dark">
+					Signup
+				</button>
+			</div>
 		</form>
 	);
 };

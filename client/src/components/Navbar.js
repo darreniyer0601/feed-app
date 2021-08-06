@@ -18,7 +18,7 @@ const Navbar = () => {
 				</NavLink>
 			</li>
 			<li className="nav-item">
-				<NavLink className="nav-link" exact to="/register">
+				<NavLink className="nav-link" exact to="/signup">
 					Register
 				</NavLink>
 			</li>
@@ -27,9 +27,9 @@ const Navbar = () => {
 
 	return (
 		<header>
-			<nav className="navbar navbar-expand-lg navbar-light bg-light">
+			<nav className="navbar navbar-expand w-100 navbar-light bg-light">
 				<a className="navbar-brand" href="/">
-					Expense Tracker
+					Feed App
 				</a>
 				<ul className="navbar-nav">
 					<li className="nav-item">
@@ -43,10 +43,12 @@ const Navbar = () => {
 						</NavLink>
 					</li>
 				</ul>
-				<ul className="navbar-nav float-right">
+                <div className="float-right">
+				<ul className="navbar-nav">
                     {authLinks}
                     {/* {authContext.authenticated ? logoutLink : authLinks} */}
                 </ul>
+                </div>
 			</nav>
 		</header>
 	);
