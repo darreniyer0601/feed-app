@@ -33,12 +33,22 @@ const PostState = (props) => {
     }
 
     // Like post
-    const likePost = (id, userId) => {
+    const likePost = (id) => {
+
+    }
+
+    // Unlike post
+    const unlikePost = (id) => {
 
     }
 
     // Dislike post
-    const dislikePost = (id, userId) => {
+    const dislikePost = (id) => {
+
+    }
+
+    // Un-dislike post
+    const unDislikePost = (id) => {
 
     }
 
@@ -51,7 +61,9 @@ const PostState = (props) => {
             deletePost,
             setCurrent,
             likePost,
-            dislikePost
+            dislikePost,
+            unlikePost,
+            unDislikePost
         }}>
             {props.children}
         </PostContext.Provider>
