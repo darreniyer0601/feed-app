@@ -20,6 +20,14 @@ const PostSchema = mongoose.Schema({
     edited: {
         type: Boolean,
         default: false
+    },
+    likes: {
+        type: Number,
+        default: 0
+    },
+    dislikes: {
+        type: Number,
+        default: 0
     }
 });
 

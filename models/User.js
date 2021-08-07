@@ -21,6 +21,16 @@ const UserSchema = mongoose.Schema({
     joined: {
         type: Date,
         default: Date.now
+    },
+    likedPosts: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'posts',
+        default: []
+    },
+    dislikedPosts: {
+        type: [mongoose.Schema.Types.ObjectId],
+        ref: 'posts',
+        default: []
     }
 })
 

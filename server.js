@@ -7,6 +7,7 @@ dotenv.config();
 
 const authRoutes = require('./routes/auth');
 const postRoutes = require('./routes/post');
+const userRoutes = require('./routes/user');
 
 // Init middleware
 app.use(express.json());
@@ -15,6 +16,7 @@ app.use(cors());
 // Register routes
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
+app.use('/api/user', userRoutes);
 
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,

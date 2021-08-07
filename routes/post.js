@@ -1,5 +1,4 @@
 const express = require('express');
-const {} = require('express-validator');
 
 const router = express.Router();
 
@@ -20,5 +19,11 @@ router.get('/', isAuth, postController.getPosts);
 
 // Get specific post
 router.get('/:id', isAuth, postController.getOnePost);
+
+// Like post
+router.put('/like/:id', isAuth, postController.addLike);
+
+// Dislike post
+router.put('/dislike/:id', isAuth, postController.addDislike);
 
 module.exports = router;

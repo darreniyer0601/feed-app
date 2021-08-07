@@ -47,7 +47,7 @@ exports.login = async (req, res) => {
 };
 
 exports.signup = async (req, res) => {
-	const { name, email, password, confirmPassword } = req.body;
+	const { username, email, password, confirmPassword } = req.body;
 
 	if (password !== confirmPassword) {
 		return res.status(401).json({ msg: "Passwords do not match" });
@@ -64,7 +64,7 @@ exports.signup = async (req, res) => {
 		const hashedPassword = await bcrypt.hash(password, 12);
 
 		const newUser = new User({
-			name,
+			username,
 			email,
 			password: hashedPassword,
 		});
