@@ -24,12 +24,14 @@ const AuthState = (props) => {
                 }
             });
 
+            console.log(res);
+
             dispatch({
                 type: AUTH_SUCCESS,
                 payload: res.data
             })
 
-            // loadUser();
+            loadUser();
         } catch (err) {
             dispatch({
                 type: AUTH_FAIL
@@ -48,12 +50,14 @@ const AuthState = (props) => {
                 }
             });
 
+            console.log(res);
+
             dispatch({
                 type: AUTH_SUCCESS,
                 payload: res.data
             })
 
-            // loadUser();
+            loadUser();
         } catch (err) {
             dispatch({
                 type: AUTH_FAIL
@@ -75,7 +79,6 @@ const AuthState = (props) => {
             dispatch({
                 type: AUTH_FAIL
             })
-            throw new Error(err.msg || err.message);
         }
     }
 
