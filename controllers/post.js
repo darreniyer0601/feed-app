@@ -203,7 +203,7 @@ exports.removeDislike = async (req, res) => {
         }
 
         const postFields = {};
-        postFields.dislikes = post.disliked - 1;
+        postFields.dislikes = post.dislikes - 1;
 
         await Post.findByIdAndUpdate(postId, {
             $set: postFields

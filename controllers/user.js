@@ -82,9 +82,11 @@ exports.removeLike = async (req, res) => {
 		const likedPosts = user.likedPosts;
 
 		const userFields = {};
+        console.log('postId', postId);
 		const updatedLikedPosts = likedPosts.filter(
-			(curId) => curId !== mongoose.Types.ObjectId(postId)
+			(curId) => curId.toString() !== postId
 		);
+
 		userFields.likedPosts = updatedLikedPosts;
 
 		await User.findByIdAndUpdate(
@@ -109,7 +111,7 @@ exports.removeDislike = async (req, res) => {
 	const userId = req.user.id;
 
 	try {
-		const user = User.findById(userId);
+		const user = await User.findById(userId);
 
 		if (!user) {
 			return res.status(404).json({ msg: "User not found" });
@@ -117,7 +119,7 @@ exports.removeDislike = async (req, res) => {
 
 		const dislikedPosts = user.dislikedPosts;
 		const updatedDislikedPosts = dislikedPosts.filter(
-			(curId) => curId !== mongoose.Types.ObjectId(postId)
+			(curId) => curId.toString() !== postId
 		);
 
 		const userFields = {};
