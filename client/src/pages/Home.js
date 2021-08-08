@@ -6,7 +6,7 @@ import Feed from '../components/post/Feed'
 const Home = () => {
     return (
         <div>
-            {/* <NewPost /> */}
+            <NewPost />
             <Feed />
         </div>
     )
