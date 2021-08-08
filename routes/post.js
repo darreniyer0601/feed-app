@@ -21,9 +21,15 @@ router.get('/', isAuth, postController.getPosts);
 router.get('/:id', isAuth, postController.getOnePost);
 
 // Like post
-router.put('/like/:id', isAuth, postController.addLike);
+router.post('/like/:id', isAuth, postController.addLike);
 
 // Dislike post
-router.put('/dislike/:id', isAuth, postController.addDislike);
+router.post('/dislike/:id', isAuth, postController.addDislike);
+
+// Remove like
+router.delete('/like/:id', isAuth, postController.removeLike);
+
+// Remove dislike
+router.delete('/dislike/:id', isAuth, postController.removeDislike);
 
 module.exports = router;
