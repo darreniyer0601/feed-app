@@ -1,14 +1,18 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 
+import AuthContext from '../context/auth/AuthContext';
+
 const Navbar = () => {
-    // const logoutLink = (
-	// 	<li className="nav-item">
-	// 		<a className="nav-link" href="/logout">
-	// 			Logout
-	// 		</a>
-	// 	</li>
-	// );
+	const authContext = useContext(AuthContext);
+
+    const logoutLink = (
+		<li className="nav-item">
+			<a className="nav-link" href="/logout">
+				Logout
+			</a>
+		</li>
+	);
 
 	const authLinks = (
 		<Fragment>
@@ -42,11 +46,15 @@ const Navbar = () => {
 							Profile
 						</NavLink>
 					</li>
+					<li className="nav-item">
+						<NavLink className="nav-link" exact to="/new-post">
+							New Post
+						</NavLink>
+					</li>
 				</ul>
                 <div className="float-right">
 				<ul className="navbar-nav">
-                    {authLinks}
-                    {/* {authContext.authenticated ? logoutLink : authLinks} */}
+                    {authContext.authenticated ? logoutLink : authLinks}
                 </ul>
                 </div>
 			</nav>

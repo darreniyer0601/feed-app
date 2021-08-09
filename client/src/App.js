@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 import Navbar from "./components/Navbar";
+import CurrentPost from "./components/post/CurrentPost";
 
 import AuthState from "./context/auth/AuthState";
 import PostState from "./context/post/PostState";
@@ -22,6 +23,7 @@ function App() {
 						<Route exact path="/" component={Home} /> {/* Private Route */}
 						<Route exact path="/profile" component={Profile} />{" "}
 						{/* Private Route */}
+						<Route exact path='/post/:id' component={CurrentPost} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/signup" component={Signup} />
 					</Switch>

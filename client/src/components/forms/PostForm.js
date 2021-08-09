@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const NewPost = () => {
+const PostForm = (props) => {
 	const [formData, setFormData] = useState({
 		title: "",
 		content: "",
@@ -24,7 +24,7 @@ const NewPost = () => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 
-		console.log(formData);
+		props.addPost(formData)
 	};
 
 	return (
@@ -63,4 +63,4 @@ const NewPost = () => {
 	);
 };
 
-export default NewPost;
+export default PostForm;

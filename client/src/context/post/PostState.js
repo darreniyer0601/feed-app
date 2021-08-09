@@ -10,10 +10,6 @@ import {
     DELETE_POST,
     SET_CURRENT,
     CLEAR_CURRENT,
-    LIKE_POST,
-    DISLIKE_POST,
-    UNLIKE_POST,
-    UNDISLIKE_POST
 } from '../types';
 
 const initialState = {
