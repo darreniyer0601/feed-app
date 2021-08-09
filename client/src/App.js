@@ -12,6 +12,7 @@ import CurrentPost from "./components/post/CurrentPost";
 
 import AuthState from "./context/auth/AuthState";
 import PostState from "./context/post/PostState";
+import NewPost from "./pages/NewPost";
 
 function App() {
 	return (
@@ -23,6 +24,7 @@ function App() {
 						<Route exact path="/" component={Home} /> {/* Private Route */}
 						<Route exact path="/profile" component={Profile} />{" "}
 						{/* Private Route */}
+						<Route exact path='/new-post' component={NewPost} />
 						<Route exact path='/post/:id' component={CurrentPost} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/signup" component={Signup} />

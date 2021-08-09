@@ -1,12 +1,12 @@
-import React, { Fragment, useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { Fragment, useContext } from "react";
+import { NavLink } from "react-router-dom";
 
-import AuthContext from '../context/auth/AuthContext';
+import AuthContext from "../context/auth/AuthContext";
 
 const Navbar = () => {
 	const authContext = useContext(AuthContext);
 
-    const logoutLink = (
+	const logoutLink = (
 		<li className="nav-item">
 			<a className="nav-link" href="/logout">
 				Logout
@@ -36,30 +36,34 @@ const Navbar = () => {
 					Feed App
 				</a>
 				<ul className="navbar-nav">
-					<li className="nav-item">
-						<NavLink className="nav-link" exact to="/">
-							Home
-						</NavLink>
-					</li>
-					<li className="nav-item">
-						<NavLink className="nav-link" exact to="/profile">
-							Profile
-						</NavLink>
-					</li>
-					<li className="nav-item">
-						<NavLink className="nav-link" exact to="/new-post">
-							New Post
-						</NavLink>
-					</li>
+					{authContext.authenticated && (
+						<Fragment>
+							<li className="nav-item">
+								<NavLink className="nav-link" exact to="/">
+									Home
+								</NavLink>
+							</li>
+							<li className="nav-item">
+								<NavLink className="nav-link" exact to="/profile">
+									Profile
+								</NavLink>
+							</li>
+							<li className="nav-item">
+								<NavLink className="nav-link" exact to="/new-post">
+									New Post
+								</NavLink>
+							</li>
+						</Fragment>
+					)}
 				</ul>
-                <div className="float-right">
-				<ul className="navbar-nav">
-                    {authContext.authenticated ? logoutLink : authLinks}
-                </ul>
-                </div>
+				<div className="float-right">
+					<ul className="navbar-nav">
+						{authContext.authenticated ? logoutLink : authLinks}
+					</ul>
+				</div>
 			</nav>
 		</header>
 	);
-}
+};
 
-export default Navbar
+export default Navbar;

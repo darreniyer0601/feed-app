@@ -6,13 +6,9 @@ import PostContext from '../context/post/PostContext'
 const NewPost = ({ history }) => {
     const { addPost } = useContext(PostContext);
 
-    const handleAdd = (post) => {
-        try {
-            addPost(post);
-            history.push('/');
-        } catch (err) {
-            alert(err);
-        }
+    const handleAdd = async (post) => {
+        await addPost(post);
+        history.push('/');
     }
 
     return (
