@@ -16,22 +16,22 @@ const UserState = (props) => {
     const [state, dispatch] = useReducer(UserReducer, initialState);
 
     // Add post to liked
-    const addToLiked = (id) => {
+    const addToLiked = async (id) => {
 
     }
 
     // Add post to disliked
-    const addToDisliked = (id) => {
+    const addToDisliked = async (id) => {
 
     }
 
     // Remove post from liked
-    const removeFromLiked = (id) => {
+    const removeFromLiked = async (id) => {
 
     }
 
     // Remove post from disliked
-    const removeFromDisliked = (id) => {
+    const removeFromDisliked = async (id) => {
 
     }
 
