@@ -24,7 +24,7 @@ const AuthState = (props) => {
                 }
             });
 
-            console.log(res);
+            console.log('res', res);
 
             dispatch({
                 type: AUTH_SUCCESS,
@@ -50,7 +50,7 @@ const AuthState = (props) => {
                 }
             });
 
-            console.log(res);
+            console.log('res', res);
 
             dispatch({
                 type: AUTH_SUCCESS,
@@ -70,6 +70,8 @@ const AuthState = (props) => {
     const loadUser = async () => {
         try {
             const res = await axios.get('/api/auth/user');
+
+            console.log('res', res);
 
             dispatch({
                 type: USER_LOADED,

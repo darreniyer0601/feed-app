@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PostContext from '../../context/post/PostContext';
 import Post from './Post';
 
 const postList = [
@@ -33,9 +34,13 @@ const postList = [
 ];
 
 const Feed = () => {
+    const postContext = useContext(PostContext);
+
+    const { posts } = postContext;
+
     return (
         <div className="card-deck">
-            {postList.map(post => (
+            {posts.map(post => (
                 <Post post={post} />
             ))}
         </div>

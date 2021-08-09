@@ -5,6 +5,7 @@ import PostContext from './PostContext';
 import PostReducer from './PostReducer';
 
 import {
+    LOADED_POSTS,
     ADD_POST,
     UPDATE_POST,
     DELETE_POST,
@@ -19,6 +20,20 @@ const initialState = {
 
 const PostState = (props) => {
     const [state, dispatch] = useReducer(PostReducer, initialState);
+
+    // Get all posts
+    const getPosts = async () => {
+        try {
+            const res = await axios.get('/api/post');
+
+            dispatch({
+                type: LOADED_POSTS,
+                payload: res.data
+            })
+        } catch (err) {
+            console.log(err);
+        }
+    }
 
     // Add new post
     const addPost = async (post) => {
@@ -125,6 +140,7 @@ const PostState = (props) => {
         <PostContext.Provider value={{
             current: state.current,
             posts: state.posts,
+            getPosts,
             addPost,
             updatePost,
             deletePost,
