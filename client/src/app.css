@@ -1,3 +1,9 @@
-.likeIcon:hover {
-    cursor: pointer;
+.post-header {
+    color: chocolate;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.display-name {
+    font-size: small;
 }

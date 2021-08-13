@@ -1,38 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Post = ({ post }) => {
-    const { id, title, content, likes, dislikes } = post;
-
-    const [state, setState] = useState({
-        likes: likes,
-        dislikes: dislikes
-    })
-
-    const handleLike = () => {
-        setState({
-            ...state,
-            likes: state.likes + 1
-        });
-    }
-
-    const handleDislike = () => {
-        setState({
-            ...state,
-            dislikes: state.dislikes + 1
-        })
-    }
+	const { id, title, likes, displayName, comments } = post;
 
 	return (
 		<div class="card m-3" id={id}>
+			<div class="card-header">
+				<a href={`/post/${id}`} className="post-header">{title}</a>
+			</div>
 			<div class="card-body">
-				<h5 class="card-title">
-                    <a href="#!">{title}</a>
-                </h5>
-				<p class="card-text">
-					{`${content.substring(0, 10)}...`}
-				</p>
-                <i className="fas fa-thumbs-up 2x m-2 likeIcon" onClick={handleLike} />{state.likes}
-                <i className="fas fa-thumbs-down 2x m-2 likeIcon" onClick={handleDislike} />{state.dislikes}
+				<p class="card-text text-muted display-name">{`Posted by ${displayName}`}</p>
+				<i className="fas fa-thumbs-up 2x m-2" />
+				{likes}
+				<i className="fas fa-comment 2x m-2" />
+				{comments}
 			</div>
 		</div>
 	);
