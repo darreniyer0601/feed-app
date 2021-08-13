@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const User = require('../models/User');
 
 exports.addPost = async (req, res) => {
     const { title, content } = req.body;
@@ -6,11 +7,18 @@ exports.addPost = async (req, res) => {
     const author = req.user.id;
 
     try {
+        const user = await User.findById(author);
+
+        // Check if user exists
+        if (!user) {
+            return res.status(404).json({ msg: 'User not found' });
+        }
+
         const newPost = new Post({
             author,
             title,
             content,
-            author
+            displayName: user.username
         });
 
         await newPost.save();

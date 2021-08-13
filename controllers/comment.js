@@ -1,4 +1,5 @@
 const Comment = require('../models/Comment');
+const User = require('../models/User');
 
 exports.addComment = async (req, res) => {
     const postId = req.params.postId;
@@ -7,8 +8,10 @@ exports.addComment = async (req, res) => {
     try {
         const { text } = req.body;
 
+        const user = await User.findById(userId);
+
         const comment = new Comment({
-            author: userId,
+            author: user.username,
             post: postId,
             text
         });

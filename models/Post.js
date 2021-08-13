@@ -9,6 +9,10 @@ const PostSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    displayName: {
+        type: String,
+        required: true
+    },
     createdAt: {
         type: Date,
         default: new Date().getDate()
@@ -25,10 +29,6 @@ const PostSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    comments: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'comments'
-    }
 });
 
 module.exports = mongoose.model('Post', PostSchema);
