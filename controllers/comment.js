@@ -26,7 +26,9 @@ exports.getComments = async (req, res) => {
     const postId = req.params.postId;
     
     try {
-        
+        const comments = await Comment.find({ post: postId });
+
+        res.status(200).json(comments);
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ msg: 'Server error' });
