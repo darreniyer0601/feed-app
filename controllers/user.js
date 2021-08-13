@@ -1,5 +1,4 @@
 const User = require("../models/User");
-const mongoose = require("mongoose");
 
 exports.likePost = async (req, res) => {
 	const postId = req.params.id;
@@ -11,6 +10,13 @@ exports.likePost = async (req, res) => {
 		//  Check if user exists
 		if (!user) {
 			return res.status(404).json({ msg: "User not found" });
+		}
+
+		// Check if post is already liked
+		const idx = user.likedPosts.find(post => post.toString() === postId);
+
+		if (idx !== -1) {
+			return res.status(401).json({ msg: "Post already liked" });
 		}
 
 		const userFields = {};
@@ -35,39 +41,6 @@ exports.likePost = async (req, res) => {
 	}
 };
 
-exports.dislikePost = async (req, res) => {
-	const postId = req.params.id;
-	const userId = req.user.id;
-
-	try {
-		const user = await User.findById(userId);
-
-		// Check if user exists
-		if (!user) {
-			return res.status(404).json({ msg: "User not found" });
-		}
-
-		const userFields = {};
-		userFields.dislikedPosts = user.dislikedPosts;
-		userFields.dislikedPosts.push(postId);
-
-		await User.findByIdAndUpdate(
-			userId,
-			{
-				$set: userFields,
-			},
-			{
-				new: true,
-			}
-		);
-
-		res.status(200).json({ msg: "Added post to disliked posts" });
-	} catch (err) {
-		console.error(err.message);
-		res.status(500).json({ msg: "Server error" });
-	}
-};
-
 exports.removeLike = async (req, res) => {
 	const postId = req.params.id;
 	const userId = req.user.id;
@@ -80,6 +53,13 @@ exports.removeLike = async (req, res) => {
 		}
 
 		const likedPosts = user.likedPosts;
+
+		// Check if post is liked
+		const idx = likedPosts.find(post => post.toString() === postId);
+
+		if (idx === -1) {
+			return res.status(404).json({ msg: "Post not liked" });
+		}
 
 		const userFields = {};
         console.log('postId', postId);
@@ -106,38 +86,3 @@ exports.removeLike = async (req, res) => {
 	}
 };
 
-exports.removeDislike = async (req, res) => {
-	const postId = req.params.id;
-	const userId = req.user.id;
-
-	try {
-		const user = await User.findById(userId);
-
-		if (!user) {
-			return res.status(404).json({ msg: "User not found" });
-		}
-
-		const dislikedPosts = user.dislikedPosts;
-		const updatedDislikedPosts = dislikedPosts.filter(
-			(curId) => curId.toString() !== postId
-		);
-
-		const userFields = {};
-		userFields.dislikedPosts = updatedDislikedPosts;
-
-		await User.findByIdAndUpdate(
-			userId,
-			{
-				$set: userFields,
-			},
-			{
-				new: true,
-			}
-		);
-
-		res.status(200).json({ msg: "Dislike removed" });
-	} catch (err) {
-		console.error(err.message);
-		res.status(500).json({ msg: "Server error" });
-	}
-};

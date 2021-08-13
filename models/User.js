@@ -27,11 +27,6 @@ const UserSchema = mongoose.Schema({
         ref: 'posts',
         default: []
     },
-    dislikedPosts: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: 'posts',
-        default: []
-    }
 })
 
 module.exports = mongoose.model('User', UserSchema);

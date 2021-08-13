@@ -139,33 +139,6 @@ exports.addLike = async (req, res) => {
     }
 }
 
-exports.addDislike = async (req, res) => {
-    const postId = req.params.id;
-
-    try {
-        const post = await Post.findById(postId);
-
-        // Check if post exists
-        if (!post) {
-            return res.status(400).json({ msg: 'Post not found' });
-        }
-
-        const postFields = {};
-        postFields.dislikes = post.dislikes + 1;
-
-        const updatedPost = await Post.findByIdAndUpdate(postId, {
-            $set: postFields
-        }, {
-            new: true
-        });
-
-        res.status(200).json(updatedPost);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).json({ msg: 'Server error' });
-    }
-}
-
 exports.removeLike = async (req, res) => {
     const postId = req.params.id;
 
@@ -186,32 +159,6 @@ exports.removeLike = async (req, res) => {
         });
 
         res.status(200).json({ msg: 'Like removed' });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).json({ msg: 'Server error' });
-    }
-}
-
-exports.removeDislike = async (req, res) => {
-    const postId = req.params.id;
-
-    try {
-        const post = await Post.findById(postId);
-
-        if (!post) {
-            return res.status(404).json({ msg: 'Post not found' });
-        }
-
-        const postFields = {};
-        postFields.dislikes = post.dislikes - 1;
-
-        await Post.findByIdAndUpdate(postId, {
-            $set: postFields
-        }, {
-            new: true
-        });
-
-        res.status(200).json({ msg: 'Dislike removed' });
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ msg: 'Server error' });
