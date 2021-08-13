@@ -13,7 +13,7 @@ exports.likePost = async (req, res) => {
 		}
 
 		// Check if post is already liked
-		const idx = user.likedPosts.find(post => post.toString() === postId);
+		const idx = user.likedPosts.findIndex(post => post.toString() === postId);
 
 		if (idx !== -1) {
 			return res.status(401).json({ msg: "Post already liked" });
@@ -55,14 +55,14 @@ exports.removeLike = async (req, res) => {
 		const likedPosts = user.likedPosts;
 
 		// Check if post is liked
-		const idx = likedPosts.find(post => post.toString() === postId);
+		const idx = likedPosts.findIndex(post => post.toString() === postId);
 
 		if (idx === -1) {
 			return res.status(404).json({ msg: "Post not liked" });
 		}
 
 		const userFields = {};
-        console.log('postId', postId);
+
 		const updatedLikedPosts = likedPosts.filter(
 			(curId) => curId.toString() !== postId
 		);
