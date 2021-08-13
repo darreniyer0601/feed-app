@@ -4,6 +4,8 @@ import {
     DELETE_POST,
     SET_CURRENT,
     CLEAR_CURRENT,
+    LOAD_COMMENTS,
+    LOADED_POSTS,
 } from '../types';
 
 const PostReducer = (state, action) => {
@@ -31,10 +33,22 @@ const PostReducer = (state, action) => {
                 ...state,
                 current: state.posts.filter(post => post.id === action.payload)
             }
+        case LOADED_POSTS:
+            return {
+                ...state,
+                posts: action.payload,
+                comments: []
+            }
+        case LOAD_COMMENTS:
+            return {
+                ...state,
+                comments: action.payload
+            }
         case CLEAR_CURRENT:
             return {
                 ...state,
-                current: null
+                current: null,
+                comments: []
             }
         default:
             return state;

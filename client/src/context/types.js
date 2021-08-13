@@ -12,11 +12,8 @@ export const SET_CURRENT = 'SET_CURRENT';
 export const CLEAR_CURRENT = 'CLEAR_CURRENT';
 
 export const LIKE_POST = 'LIKE_POST';
-export const DISLIKE_POST = 'DISLIKE_POST';
 export const UNLIKE_POST = 'UNLIKE_POST';
-export const UNDISLIKE_POST = 'UNDISLIKE_POST';
 
-export const ADD_TO_LIKE = 'ADD_TO_LIKE';
-export const ADD_TO_DISLIKE = 'ADD_TO_DISLIKE';
-export const REMOVE_FROM_LIKE = 'REMOVE_FROM_LIKE';
-export const REMOVE_FROM_DISLIKE = 'REMOVE_FROM_DISLIKE';
+export const ADD_COMMENT = 'ADD_COMMENT';
+export const LOAD_COMMENTS = 'LOAD_COMMENTS';
+export const CLEAR_ALL = 'CLEAR_ALL';

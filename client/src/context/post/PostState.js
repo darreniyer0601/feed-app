@@ -11,11 +11,15 @@ import {
     DELETE_POST,
     SET_CURRENT,
     CLEAR_CURRENT,
+    LOAD_COMMENTS,
+    ADD_COMMENT
 } from '../types';
 
 const initialState = {
     current: null,
     posts: [],
+    likedPosts: [],
+    comments: []
 }
 
 const PostState = (props) => {
@@ -54,10 +58,18 @@ const PostState = (props) => {
     }
 
     // Set current post
-    const setCurrent = (id) => {
+    const setCurrent = async (id) => {
         dispatch({
             type: SET_CURRENT,
             payload: id
+        });
+
+        // Fetch comments for current post
+        const res = await axios.get(`/api/comment/${id}`);
+
+        dispatch({
+            type: LOAD_COMMENTS,
+            payload: res.data
         })
     }
 
@@ -118,19 +130,19 @@ const PostState = (props) => {
         }
     }
 
-    // Dislike post
-    const dislikePost = async (id) => {
+    // Comment on a post
+    const addComment = async (comment) => {
         try {
+            const res = await axios.post(`/api/comment/${state.current.id}`, comment, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
 
-        } catch (err) {
-            console.log(err);
-        }
-    }
-
-    // Un-dislike post
-    const unDislikePost = async (id) => {
-        try {
-
+            dispatch({
+                type: ADD_COMMENT,
+                payload: res.data
+            })
         } catch (err) {
             console.log(err);
         }
@@ -147,9 +159,8 @@ const PostState = (props) => {
             setCurrent,
             clearCurrent,
             likePost,
-            dislikePost,
             unlikePost,
-            unDislikePost
+            addComment
         }}>
             {props.children}
         </PostContext.Provider>
