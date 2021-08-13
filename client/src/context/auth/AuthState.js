@@ -24,14 +24,14 @@ const AuthState = (props) => {
                 }
             });
 
-            console.log('res', res);
+            console.log('res', res.data);
 
             dispatch({
                 type: AUTH_SUCCESS,
                 payload: res.data
             })
 
-            loadUser();
+            // loadUser();
         } catch (err) {
             dispatch({
                 type: AUTH_FAIL
@@ -57,7 +57,7 @@ const AuthState = (props) => {
                 payload: res.data
             })
 
-            loadUser();
+            // loadUser();
         } catch (err) {
             dispatch({
                 type: AUTH_FAIL
