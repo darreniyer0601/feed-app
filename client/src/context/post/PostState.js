@@ -152,6 +152,7 @@ const PostState = (props) => {
         <PostContext.Provider value={{
             current: state.current,
             posts: state.posts,
+            comments: state.comments,
             getPosts,
             addPost,
             updatePost,

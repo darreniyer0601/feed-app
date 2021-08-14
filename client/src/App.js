@@ -6,9 +6,9 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import CurrentPost from "./pages/CurrentPost";
 
 import Navbar from "./components/Navbar";
-import CurrentPost from "./components/post/CurrentPost";
 
 import AuthState from "./context/auth/AuthState";
 import PostState from "./context/post/PostState";
@@ -25,7 +25,7 @@ function App() {
 						<Route exact path="/profile" component={Profile} />{" "}
 						{/* Private Route */}
 						<Route exact path='/new-post' component={NewPost} />
-						<Route exact path='/post/:id' component={CurrentPost} />
+						<Route exact path='/post/:postId' component={CurrentPost} />
 						<Route exact path="/login" component={Login} />
 						<Route exact path="/signup" component={Signup} />
 					</Switch>
