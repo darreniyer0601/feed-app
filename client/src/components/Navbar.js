@@ -32,8 +32,8 @@ const Navbar = () => {
 	return (
 		<header>
 			<nav className="navbar navbar-expand w-100 navbar-light bg-light">
-				<a className="navbar-brand" href="/">
-					Feed App
+				<a className="navbar-brand m-2" href="/">
+					<h3><strong>Feed App</strong></h3>
 				</a>
 				<ul className="navbar-nav">
 					{authContext.authenticated && (

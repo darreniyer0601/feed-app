@@ -16,7 +16,7 @@ const CurrentPost = () => {
 
     const currentPost = {
         id: Math.random.toString(),
-        title: '',
+        title: 'So about the new episode of ',
         content: '',
         likes: 2,
         displayName: 'Darren Iyer'

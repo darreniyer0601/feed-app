@@ -1,3 +1,8 @@
+body {
+    font-family: 'shadows';
+    font-size: x-large;
+}
+
 .post-header {
     color: chocolate;
     font-weight: bold;
