@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import moment from "moment";
 import { useParams } from "react-router";
 
@@ -7,6 +7,7 @@ import PostContext from "../context/post/PostContext";
 const CurrentPost = () => {
 	// const { postId } = useParams();
 	// const postContext = useContext(PostContext);
+	const [comment, setComment] = useState("");
 
 	// useEffect(() => {
 	//     postContext.setCurrent(postId);
@@ -14,6 +15,15 @@ const CurrentPost = () => {
 
 	// const { id, title, content, likes, dislikes, author } = postContext.current;
 	// const { comments } = postContext;
+
+	const handleChange = (e) => {
+		setComment(e.target.value);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log(comment);
+	};
 
 	const currentPost = {
 		id: Math.random.toString(),
@@ -45,7 +55,7 @@ const CurrentPost = () => {
 		},
 	];
 
-	const { title, content, likes, displayName, createdAt } = currentPost;
+	const { title, content, displayName, createdAt } = currentPost;
 
 	return (
 		<div>
@@ -64,6 +74,20 @@ const CurrentPost = () => {
 					<button className="btn btn-warning m-2 disabled">Unlike Post</button>
 				</div>
 			</div>
+				<form onSubmit={handleSubmit} className="m-4 d-flex flex-align-row justify-content-around">
+					<div className="form-group mr-3">
+						<input
+							name="comment"
+							type="text"
+							className="form-control"
+							required
+							onChange={handleChange}
+						/>
+					</div>
+						<button type="submit" className="btn btn-dark ml-3">
+							Comment
+						</button>
+				</form>
 			<div class="list-group d-flex m-4">
 				{comments.map((comment) => (
 					<div class="list-group-item list-group-item-action flex-column align-items-start">
