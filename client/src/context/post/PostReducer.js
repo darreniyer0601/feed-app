@@ -6,6 +6,7 @@ import {
     CLEAR_CURRENT,
     LOAD_COMMENTS,
     LOADED_POSTS,
+    ADD_COMMENT,
 } from '../types';
 
 const PostReducer = (state, action) => {
@@ -29,9 +30,16 @@ const PostReducer = (state, action) => {
                 })
             }
         case SET_CURRENT:
+            const current = state.posts.filter(post => post.id === action.payload);
+            const idx = state.likedPosts.findIndex(cur => cur === current.id);
+            if (idx !== -1) {
+                current.isLiked = true;
+            } else {
+                current.isLiked = false;
+            }
             return {
                 ...state,
-                current: state.posts.filter(post => post.id === action.payload)
+                current: current
             }
         case LOADED_POSTS:
             return {
@@ -43,6 +51,11 @@ const PostReducer = (state, action) => {
             return {
                 ...state,
                 comments: action.payload
+            }
+        case ADD_COMMENT:
+            return {
+                ...state,
+                comments: [action.payload, ...state.comments]
             }
         case CLEAR_CURRENT:
             return {

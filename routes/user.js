@@ -11,4 +11,7 @@ router.post('/like/:id', isAuth, userController.likePost);
 // Remove like from post
 router.delete('/like/:id', isAuth, userController.removeLike);
 
+// Get liked posts
+router.get('/like', isAuth, userController.getLikedPosts);
+
 module.exports = router;

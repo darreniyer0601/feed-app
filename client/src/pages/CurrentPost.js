@@ -8,12 +8,12 @@ const CurrentPost = () => {
 	// const { postId } = useParams();
 	// const postContext = useContext(PostContext);
 	const [comment, setComment] = useState("");
-
+	
 	// useEffect(() => {
 	//     postContext.setCurrent(postId);
 	// }, [postContext, postId]);
 
-	// const { id, title, content, likes, dislikes, author } = postContext.current;
+	// const { id, title, content, likes, dislikes, author, isLiked } = postContext.current;
 	// const { comments } = postContext;
 
 	const handleChange = (e) => {
@@ -45,6 +45,7 @@ const CurrentPost = () => {
 		likes: 2,
 		displayName: "Darren Iyer",
 		createdAt: moment().format("MMM Do YY"),
+		isLiked: true
 	};
 
 	const comments = [
@@ -55,7 +56,19 @@ const CurrentPost = () => {
 		},
 	];
 
-	const { title, content, displayName, createdAt } = currentPost;
+	const { title, content, displayName, createdAt, isLiked } = currentPost;
+
+	const [liked, setLiked] = useState(isLiked);
+
+	const handleLike = () => {
+		// Send command to context
+		setLiked(true);
+	}
+
+	const handleUnlike = () => {
+		// Send command to context
+		setLiked(false);
+	}
 
 	return (
 		<div>
@@ -70,8 +83,8 @@ const CurrentPost = () => {
 				</div>
 				<div className="card-body">{content}</div>
 				<div className="card-footer d-flex flex-align-row justify-content-center">
-					<button className="btn btn-success m-2">Like Post</button>
-					<button className="btn btn-warning m-2 disabled">Unlike Post</button>
+					<button disabled={liked} className="btn btn-success m-2" onClick={handleLike}>Like Post</button>
+					<button disabled={!liked} className="btn btn-warning m-2" onClick={handleUnlike}>Unlike Post</button>
 				</div>
 			</div>
 				<form onSubmit={handleSubmit} className="m-4 d-flex flex-align-row justify-content-around">

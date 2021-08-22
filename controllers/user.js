@@ -86,3 +86,20 @@ exports.removeLike = async (req, res) => {
 	}
 };
 
+exports.getLikedPosts = async (req, res) => {
+	const userId = req.user.id;
+
+	try {
+		const user = await User.findById(userId);
+
+		// Check if user exists
+		if (!user) {
+			return res.status(404).json({ msg: 'User not found' });
+		}
+
+		res.status(200).json(user.likedPosts);
+	} catch (err) {
+		console.error(err.message);
+		res.status(500).json({ msg: 'Server error' });
+	}
+}
