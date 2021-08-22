@@ -12,7 +12,9 @@ import {
     SET_CURRENT,
     CLEAR_CURRENT,
     LOAD_COMMENTS,
-    ADD_COMMENT
+    ADD_COMMENT,
+    LIKE_POST,
+    UNLIKE_POST
 } from '../types';
 
 const initialState = {
@@ -115,6 +117,14 @@ const PostState = (props) => {
     // Like post
     const likePost = async (id) => {
         try {
+            const updatedPost = await axios.post(`/api/post/like/${id}`);
+            
+            await axios.post(`/api/user/like/${id}`);
+
+            dispatch({
+                type: LIKE_POST,
+                payload: updatedPost
+            });
 
         } catch (err) {
             console.log(err);
@@ -124,7 +134,14 @@ const PostState = (props) => {
     // Unlike post
     const unlikePost = async (id) => {
         try {
+            const updatedPost = await axios.delete(`/api/post/like/${id}`);
 
+            await axios.delete(`/api/user/like/${id}`);
+
+            dispatch({
+                type: UNLIKE_POST,
+                payload: updatedPost
+            })
         } catch (err) {
             console.log(err);
         }

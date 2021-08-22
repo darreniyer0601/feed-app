@@ -7,6 +7,8 @@ import {
     LOAD_COMMENTS,
     LOADED_POSTS,
     ADD_COMMENT,
+    LIKE_POST,
+    UNLIKE_POST,
 } from '../types';
 
 const PostReducer = (state, action) => {
@@ -46,6 +48,38 @@ const PostReducer = (state, action) => {
                 ...state,
                 posts: action.payload,
                 comments: []
+            }
+        case LIKE_POST:
+            return {
+                ...state,
+                posts: state.posts.map(post => {
+                    if (post.id === action.payload.id) {
+                        return action.payload
+                    } else {
+                        return post;
+                    }
+                }),
+                likedPosts: [action.payload.id, ...state.likedPosts],
+                current: {
+                    ...state.current,
+                    isLiked: true
+                }
+            }
+        case UNLIKE_POST:
+            return {
+                ...state,
+                posts: state.posts.map(post => {
+                    if (post.id === action.payload.id) {
+                        return action.payload
+                    } else {
+                        return post;
+                    }
+                }),
+                likedPosts: state.likedPosts.filter(cur_id => cur_id !== action.payload.id),
+                current: {
+                    ...state.current,
+                    isLiked: false
+                }
             }
         case LOAD_COMMENTS:
             return {
