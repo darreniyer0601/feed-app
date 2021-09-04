@@ -11,8 +11,14 @@ const userRoutes = require('./routes/user');
 const commentRoutes = require('./routes/comment');
 
 // Init middleware
+app.use(express.urlencoded());
 app.use(express.json());
-app.use(cors());
+// app.use(cors());
+
+app.use((req, res, next) => {
+    console.log(req.url, req.body);
+    next();
+})
 
 // Register routes
 app.use('/api/auth', authRoutes);

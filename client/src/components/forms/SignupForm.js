@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const SignupForm = (props) => {
     const [formData, setFormData] = useState({
-        name: '',
+        username: '',
         email: '',
         password: '',
         password2: ''
@@ -24,9 +24,9 @@ const SignupForm = (props) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<div className="form-group m-3">
-				<label>Name</label>
+				<label>Username</label>
 				<input
-					name="name"
+					name="username"
 					type="text"
 					className="form-control"
                     required
