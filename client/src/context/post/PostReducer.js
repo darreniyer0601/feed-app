@@ -21,18 +21,18 @@ const PostReducer = (state, action) => {
         case DELETE_POST:
             return {
                 ...state,
-                posts: state.posts.filter(post => post.id !== action.payload)
+                posts: state.posts.filter(post => post._id !== action.payload)
             }
         case UPDATE_POST:
             return {
                 ...state,
                 posts: state.posts.map(post => {
-                    if (post.id === action.payload._id) return action.payload
+                    if (post._id === action.payload._id) return action.payload
                     else return post
                 })
             }
         case SET_CURRENT:
-            const current = state.posts.filter(post => post.id === action.payload);
+            const current = state.posts.filter(post => post._id === action.payload);
             const idx = state.likedPosts.findIndex(cur => cur === current._id);
             if (idx !== -1) {
                 current.isLiked = true;
