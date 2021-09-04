@@ -8,7 +8,7 @@ const CurrentPost = () => {
 	// const { postId } = useParams();
 	// const postContext = useContext(PostContext);
 	const [comment, setComment] = useState("");
-	
+
 	// useEffect(() => {
 	//     postContext.setCurrent(postId);
 	// }, [postContext, postId]);
@@ -45,7 +45,7 @@ const CurrentPost = () => {
 		likes: 2,
 		displayName: "Darren Iyer",
 		createdAt: moment().format("MMM Do YY"),
-		isLiked: true
+		isLiked: true,
 	};
 
 	const comments = [
@@ -63,12 +63,12 @@ const CurrentPost = () => {
 	const handleLike = () => {
 		// Send command to context
 		setLiked(true);
-	}
+	};
 
 	const handleUnlike = () => {
 		// Send command to context
 		setLiked(false);
-	}
+	};
 
 	return (
 		<div>
@@ -83,12 +83,28 @@ const CurrentPost = () => {
 				</div>
 				<div className="card-body">{content}</div>
 				<div className="card-footer d-flex flex-align-row justify-content-center">
-					<button disabled={liked} className="btn btn-success m-2" onClick={handleLike}>Like Post</button>
-					<button disabled={!liked} className="btn btn-warning m-2" onClick={handleUnlike}>Unlike Post</button>
+					<button
+						disabled={liked}
+						className="btn btn-success m-2"
+						onClick={handleLike}
+					>
+						Like Post
+					</button>
+					<button
+						disabled={!liked}
+						className="btn btn-warning m-2"
+						onClick={handleUnlike}
+					>
+						Unlike Post
+					</button>
 				</div>
 			</div>
-				<form onSubmit={handleSubmit} className="m-4 d-flex flex-align-row justify-content-around">
-					<div className="form-group mr-3">
+			<div className="container">
+				<form
+					onSubmit={handleSubmit}
+					className="m-2 row"
+				>
+					<div className="col-8 form-group mr-3">
 						<input
 							name="comment"
 							type="text"
@@ -97,10 +113,13 @@ const CurrentPost = () => {
 							onChange={handleChange}
 						/>
 					</div>
+					<div className="col-4">
 						<button type="submit" className="btn btn-dark ml-3">
 							Comment
 						</button>
+					</div>
 				</form>
+			</div>
 			<div class="list-group d-flex m-4">
 				{comments.map((comment) => (
 					<div class="list-group-item list-group-item-action flex-column align-items-start">
