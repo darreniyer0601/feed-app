@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import moment from "moment";
 // import { useParams } from "react-router";
 
@@ -9,11 +9,10 @@ const CurrentPost = () => {
 	const postContext = useContext(PostContext);
 	const [comment, setComment] = useState("");
 
-	// useEffect(() => {
-	//     postContext.setCurrent(postId);
-	// }, [postContext, postId]);
-
-	console.log(postContext.current[0]);
+	useEffect(() => {
+	    postContext.fetchComments();
+		// eslint-disable-next-line
+	}, []);
 
 	const { _id, title, content, displayName, createdAt } = postContext.current[0];
 	const { comments, addComment, likePost, unlikePost } = postContext;
@@ -93,7 +92,7 @@ const CurrentPost = () => {
 			</div>
 			<div class="list-group d-flex m-4">
 				{comments.map((comment) => (
-					<div class="list-group-item list-group-item-action flex-column align-items-start">
+					<div id={comment._id} class="list-group-item list-group-item-action flex-column align-items-start m-2">
 						<div class="d-flex w-100 justify-content-between">
 							<h5 class="mb-1">{comment.author}</h5>
 							<small>{moment().startOf("hour").fromNow()}</small>

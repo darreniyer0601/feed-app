@@ -8,7 +8,8 @@ const Home = () => {
 
     useEffect(() => {
         postContext.getPosts();
-    }, [postContext]);
+		// eslint-disable-next-line
+    }, []);
 
 	return (
 		<div>

@@ -70,14 +70,12 @@ const PostState = (props) => {
 			type: SET_CURRENT,
 			payload: id,
 		});
-
-		fetchComments();
 	};
 
 	const fetchComments = async () => {
 		try {
 			// Fetch comments for current post
-			const res = await axios.get(`/api/comment/${state.current._id}`, {
+			const res = await axios.get(`/api/comment/${state.current[0]._id}`, {
 				headers: {
 					Authorization: `${localStorage.getItem("token")}`,
 				},
@@ -186,10 +184,14 @@ const PostState = (props) => {
 
 	// Comment on a post
 	const addComment = async (comment) => {
+		const reqBody = {
+			text: comment
+		};
+
 		try {
 			const res = await axios.post(
-				`/api/comment/${state.current._id}`,
-				comment,
+				`/api/comment/${state.current[0]._id}`,
+				reqBody,
 				{
 					headers: {
 						"Content-Type": "application/json",
@@ -222,6 +224,7 @@ const PostState = (props) => {
 				likePost,
 				unlikePost,
 				addComment,
+				fetchComments
 			}}
 		>
 			{props.children}
