@@ -30,7 +30,11 @@ const PostState = (props) => {
     // Get all posts
     const getPosts = async () => {
         try {
-            const res = await axios.get('/api/post');
+            const res = await axios.get('/api/post', {
+                headers: {
+                    'Authorization': `${localStorage.getItem('token')}`
+                }
+            });
 
             dispatch({
                 type: LOADED_POSTS,
@@ -46,7 +50,8 @@ const PostState = (props) => {
         try {
             const res = await axios.post('/api/post', post, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `${localStorage.getItem('token')}`
                 }
             });
 
@@ -67,7 +72,11 @@ const PostState = (props) => {
         });
 
         // Fetch comments for current post
-        const res = await axios.get(`/api/comment/${id}`);
+        const res = await axios.get(`/api/comment/${id}`, {
+            headers: {
+                'Authorization': `${localStorage.getItem('token')}`
+            }
+        });
 
         dispatch({
             type: LOAD_COMMENTS,
@@ -87,7 +96,8 @@ const PostState = (props) => {
         try {
             const res = await axios.put(`/api/post/${post.id}`, post, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `${localStorage.getItem('token')}`
                 }
             });
 
@@ -103,7 +113,11 @@ const PostState = (props) => {
     // Delete post
     const deletePost = async (id) => {
         try {
-            await axios.delete(`/api/post/${id}`);
+            await axios.delete(`/api/post/${id}`, {
+                headers: {
+                    'Authorization': `${localStorage.getItem('token')}`
+                }
+            });
 
             dispatch({
                 type: DELETE_POST,
@@ -119,7 +133,11 @@ const PostState = (props) => {
         try {
             const updatedPost = await axios.post(`/api/post/like/${id}`);
             
-            await axios.post(`/api/user/like/${id}`);
+            await axios.post(`/api/user/like/${id}`, {
+                headers: {
+                    'Authorization': `${localStorage.getItem('token')}`
+                }
+            });
 
             dispatch({
                 type: LIKE_POST,
@@ -134,7 +152,11 @@ const PostState = (props) => {
     // Unlike post
     const unlikePost = async (id) => {
         try {
-            const updatedPost = await axios.delete(`/api/post/like/${id}`);
+            const updatedPost = await axios.delete(`/api/post/like/${id}`, {
+                headers: {
+                    'Authorization': `${localStorage.getItem('token')}`
+                }
+            });
 
             await axios.delete(`/api/user/like/${id}`);
 
@@ -152,7 +174,8 @@ const PostState = (props) => {
         try {
             const res = await axios.post(`/api/comment/${state.current._id}`, comment, {
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `${localStorage.getItem('token')}`
                 }
             });
 
