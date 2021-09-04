@@ -24,8 +24,6 @@ const AuthState = (props) => {
                 }
             });
 
-            console.log('res', res.data);
-
             dispatch({
                 type: AUTH_SUCCESS,
                 payload: res.data
@@ -50,8 +48,6 @@ const AuthState = (props) => {
                 }
             });
 
-            console.log('res', res);
-
             dispatch({
                 type: AUTH_SUCCESS,
                 payload: res.data
@@ -69,9 +65,11 @@ const AuthState = (props) => {
     // Load user
     const loadUser = async () => {
         try {
-            const res = await axios.get('/api/auth/user');
-
-            console.log('res', res);
+            const res = await axios.get('/api/auth/user', {
+                headers: {
+                    'Authorization': `${localStorage.getItem('token')}`
+                }
+            });
 
             dispatch({
                 type: USER_LOADED,
