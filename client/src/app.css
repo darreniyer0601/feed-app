@@ -9,6 +9,11 @@ body {
     text-decoration: none;
 }
 
+.post-header:hover {
+    color: cadetblue;
+    cursor: pointer;
+}
+
 .display-name {
     font-size: small;
 }

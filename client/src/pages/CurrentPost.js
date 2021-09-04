@@ -1,19 +1,21 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import moment from "moment";
-import { useParams } from "react-router";
+// import { useParams } from "react-router";
 
 import PostContext from "../context/post/PostContext";
 
 const CurrentPost = () => {
-	const { postId } = useParams();
+	// const { postId } = useParams();
 	const postContext = useContext(PostContext);
 	const [comment, setComment] = useState("");
 
-	useEffect(() => {
-	    postContext.setCurrent(postId);
-	}, [postContext, postId]);
+	// useEffect(() => {
+	//     postContext.setCurrent(postId);
+	// }, [postContext, postId]);
 
-	const { id, title, content, displayName, createdAt, isLiked } = postContext.current;
+	console.log(postContext.current[0]);
+
+	const { _id, title, content, displayName, createdAt } = postContext.current[0];
 	const { comments, addComment, likePost, unlikePost } = postContext;
 
 	const handleChange = (e) => {
@@ -25,17 +27,17 @@ const CurrentPost = () => {
 		addComment(comment);
 	};
 
-	const [liked, setLiked] = useState(isLiked);
+	const [liked, setLiked] = useState(postContext.current.isLiked);
 
-	const handleLike = () => {
+	const handleLike = async () => {
 		// Send command to context
-		likePost(id);
+		await likePost(_id);
 		setLiked(true);
 	};
 
-	const handleUnlike = () => {
+	const handleUnlike = async () => {
 		// Send command to context
-		unlikePost(id);
+		await unlikePost(_id);
 		setLiked(false);
 	};
 
