@@ -4,20 +4,12 @@ const PostForm = (props) => {
 	const [formData, setFormData] = useState({
 		title: "",
 		content: "",
-		image: "",
 	});
 
 	const handleChange = (e) => {
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
-		});
-	};
-
-	const handleFileChange = (e) => {
-		setFormData({
-			...formData,
-			image: e.target.files[0],
 		});
 	};
 
@@ -50,10 +42,6 @@ const PostForm = (props) => {
 					onChange={handleChange}
 				/>
 			</div>
-            <div className="form-group m-3">
-                <label>Add an Image</label>
-                <input type="file" className="form-control" onChange={handleFileChange} />
-            </div>
             <div className="text-center">
                 <button type="submit" className="btn btn-success">
                     Add Post

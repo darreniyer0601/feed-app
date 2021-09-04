@@ -53,7 +53,7 @@ const PostReducer = (state, action) => {
             return {
                 ...state,
                 posts: state.posts.map(post => {
-                    if (post.id === action.payload._id) {
+                    if (post._id === action.payload._id) {
                         return action.payload
                     } else {
                         return post;
