@@ -27,13 +27,13 @@ const PostReducer = (state, action) => {
             return {
                 ...state,
                 posts: state.posts.map(post => {
-                    if (post.id === action.payload.id) return action.payload
+                    if (post.id === action.payload._id) return action.payload
                     else return post
                 })
             }
         case SET_CURRENT:
             const current = state.posts.filter(post => post.id === action.payload);
-            const idx = state.likedPosts.findIndex(cur => cur === current.id);
+            const idx = state.likedPosts.findIndex(cur => cur === current._id);
             if (idx !== -1) {
                 current.isLiked = true;
             } else {
@@ -53,13 +53,13 @@ const PostReducer = (state, action) => {
             return {
                 ...state,
                 posts: state.posts.map(post => {
-                    if (post.id === action.payload.id) {
+                    if (post.id === action.payload._id) {
                         return action.payload
                     } else {
                         return post;
                     }
                 }),
-                likedPosts: [action.payload.id, ...state.likedPosts],
+                likedPosts: [action.payload._id, ...state.likedPosts],
                 current: {
                     ...state.current,
                     isLiked: true
@@ -69,13 +69,13 @@ const PostReducer = (state, action) => {
             return {
                 ...state,
                 posts: state.posts.map(post => {
-                    if (post.id === action.payload.id) {
+                    if (post._id === action.payload._id) {
                         return action.payload
                     } else {
                         return post;
                     }
                 }),
-                likedPosts: state.likedPosts.filter(cur_id => cur_id !== action.payload.id),
+                likedPosts: state.likedPosts.filter(cur_id => cur_id !== action.payload._id),
                 current: {
                     ...state.current,
                     isLiked: false

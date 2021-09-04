@@ -150,7 +150,7 @@ const PostState = (props) => {
     // Comment on a post
     const addComment = async (comment) => {
         try {
-            const res = await axios.post(`/api/comment/${state.current.id}`, comment, {
+            const res = await axios.post(`/api/comment/${state.current._id}`, comment, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
