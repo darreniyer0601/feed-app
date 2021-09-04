@@ -1,11 +1,9 @@
 import React, { useContext, useState, useEffect } from "react";
 import moment from "moment";
-// import { useParams } from "react-router";
 
 import PostContext from "../context/post/PostContext";
 
 const CurrentPost = () => {
-	// const { postId } = useParams();
 	const postContext = useContext(PostContext);
 	const [comment, setComment] = useState("");
 
@@ -29,13 +27,11 @@ const CurrentPost = () => {
 	const [liked, setLiked] = useState(postContext.current.isLiked);
 
 	const handleLike = async () => {
-		// Send command to context
 		await likePost(_id);
 		setLiked(true);
 	};
 
 	const handleUnlike = async () => {
-		// Send command to context
 		await unlikePost(_id);
 		setLiked(false);
 	};
