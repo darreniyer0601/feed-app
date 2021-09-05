@@ -9,6 +9,7 @@ import {
     ADD_COMMENT,
     LIKE_POST,
     UNLIKE_POST,
+    LOADED_LIKED_POSTS,
 } from '../types';
 
 const PostReducer = (state, action) => {
@@ -33,7 +34,7 @@ const PostReducer = (state, action) => {
             }
         case SET_CURRENT:
             const current = state.posts.filter(post => post._id === action.payload);
-            const idx = state.likedPosts.findIndex(cur => cur === current._id);
+            const idx = state.likedPosts.findIndex(cur => cur === current[0]._id);
             if (idx !== -1) {
                 current.isLiked = true;
             } else {
@@ -48,6 +49,11 @@ const PostReducer = (state, action) => {
                 ...state,
                 posts: action.payload,
                 comments: []
+            }
+        case LOADED_LIKED_POSTS:
+            return {
+                ...state,
+                likedPosts: action.payload
             }
         case LIKE_POST:
             return {

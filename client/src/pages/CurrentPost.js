@@ -24,16 +24,12 @@ const CurrentPost = () => {
 		addComment(comment);
 	};
 
-	const [liked, setLiked] = useState(postContext.current.isLiked);
-
 	const handleLike = async () => {
 		await likePost(_id);
-		setLiked(true);
 	};
 
 	const handleUnlike = async () => {
 		await unlikePost(_id);
-		setLiked(false);
 	};
 
 	return (
@@ -50,14 +46,14 @@ const CurrentPost = () => {
 				<div className="card-body">{content}</div>
 				<div className="card-footer d-flex flex-align-row justify-content-center">
 					<button
-						disabled={liked}
+						disabled={postContext.current.isLiked}
 						className="btn btn-success m-2"
 						onClick={handleLike}
 					>
 						Like Post
 					</button>
 					<button
-						disabled={!liked}
+						disabled={!postContext.current.isLiked}
 						className="btn btn-warning m-2"
 						onClick={handleUnlike}
 					>
@@ -86,7 +82,7 @@ const CurrentPost = () => {
 					</div>
 				</form>
 			</div>
-			<div class="list-group d-flex m-4">
+			<div className="list-group d-flex m-4">
 				{comments.map((comment) => (
 					<div key={comment._id} className="list-group-item list-group-item-action flex-column align-items-start m-2">
 						<div className="d-flex w-100 justify-content-between">

@@ -15,6 +15,7 @@ import {
 	ADD_COMMENT,
 	LIKE_POST,
 	UNLIKE_POST,
+	LOADED_LIKED_POSTS,
 } from "../types";
 
 const initialState = {
@@ -36,10 +37,26 @@ const PostState = (props) => {
 				type: LOADED_POSTS,
 				payload: res.data,
 			});
+
+			getLikedPosts();
 		} catch (err) {
 			console.log(err);
 		}
 	};
+
+	// Get liked posts
+	const getLikedPosts = async () => {
+		try {
+			const res = await axios.get('/api/user/like');
+			
+			dispatch({
+				type: LOADED_LIKED_POSTS,
+				payload: res.data
+			})
+		} catch (err) {
+			console.log(err);
+		}
+	}
 
 	// Add new post
 	const addPost = async (post) => {

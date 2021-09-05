@@ -4,6 +4,7 @@ export const USER_LOADED = 'USER_LOADED';
 export const LOGOUT = 'LOGOUT';
 
 export const LOADED_POSTS = 'LOADED_POSTS';
+export const LOADED_LIKED_POSTS = 'LOADED_LIKED_POSTS';
 export const ADD_POST = 'ADD_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const DELETE_POST = 'DELETE_POST';

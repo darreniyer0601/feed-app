@@ -10,7 +10,7 @@ const Feed = () => {
     return (
         <div className="card-deck">
             {posts.map(post => (
-                <Post post={post} />
+                <Post post={post} key={post._id}/>
             ))}
         </div>
     )
