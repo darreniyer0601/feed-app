@@ -88,12 +88,12 @@ const CurrentPost = () => {
 			</div>
 			<div class="list-group d-flex m-4">
 				{comments.map((comment) => (
-					<div key={comment._id} class="list-group-item list-group-item-action flex-column align-items-start m-2">
-						<div class="d-flex w-100 justify-content-between">
-							<h5 class="mb-1">{comment.author}</h5>
+					<div key={comment._id} className="list-group-item list-group-item-action flex-column align-items-start m-2">
+						<div className="d-flex w-100 justify-content-between">
+							<h5 className="mb-1">{comment.author}</h5>
 							<small>{moment().startOf("hour").fromNow()}</small>
 						</div>
-						<p class="mb-1">{comment.text}</p>
+						<p className="mb-1">{comment.text}</p>
 					</div>
 				))}
 			</div>

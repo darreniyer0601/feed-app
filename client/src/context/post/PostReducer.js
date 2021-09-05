@@ -75,7 +75,7 @@ const PostReducer = (state, action) => {
                         return post;
                     }
                 }),
-                likedPosts: state.likedPosts.filter(cur_id => cur_id !== action.payload._id),
+                likedPosts: state.likedPosts.filter(cur_id => cur_id === action.payload._id),
                 current: {
                     ...state.current,
                     isLiked: false

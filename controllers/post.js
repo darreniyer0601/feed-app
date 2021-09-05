@@ -122,7 +122,6 @@ exports.getOnePost = async (req, res) => {
 
 exports.addLike = async (req, res) => {
     const postId = req.params.id;
-    console.log('liking post');
 
     try {
         const post = await Post.findById(postId);

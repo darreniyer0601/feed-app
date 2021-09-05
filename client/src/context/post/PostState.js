@@ -30,11 +30,7 @@ const PostState = (props) => {
 	// Get all posts
 	const getPosts = async () => {
 		try {
-			const res = await axios.get("/api/post", {
-				headers: {
-					Authorization: `${localStorage.getItem("token")}`,
-				},
-			});
+			const res = await axios.get("/api/post");
 
 			dispatch({
 				type: LOADED_POSTS,
@@ -75,11 +71,7 @@ const PostState = (props) => {
 	const fetchComments = async () => {
 		try {
 			// Fetch comments for current post
-			const res = await axios.get(`/api/comment/${state.current[0]._id}`, {
-				headers: {
-					Authorization: `${localStorage.getItem("token")}`,
-				},
-			});
+			const res = await axios.get(`/api/comment/${state.current[0]._id}`);
 
 			dispatch({
 				type: LOAD_COMMENTS,
@@ -136,46 +128,31 @@ const PostState = (props) => {
 
 	// Like post
 	const likePost = async (id) => {
+		console.log('token', localStorage.getItem('token'));
 		try {
-			const updatedPost = await axios.post(`/api/post/like/${id}`, {
-				headers: {
-					Authorization: `${localStorage.getItem("token")}`,
-				},
-			});
-
-			await axios.post(`/api/user/like/${id}`, {
-				headers: {
-					Authorization: `${localStorage.getItem("token")}`,
-				},
-			});
+			const res = await axios.post(`/api/post/like/${id}`);
+			
+			await axios.post(`/api/user/like/${id}`);
 
 			dispatch({
 				type: LIKE_POST,
-				payload: updatedPost,
+				payload: res.data,
 			});
 		} catch (err) {
-			console.log(err);
+			alert(err);
 		}
 	};
 
 	// Unlike post
 	const unlikePost = async (id) => {
 		try {
-			const updatedPost = await axios.delete(`/api/post/like/${id}`, {
-				headers: {
-					Authorization: `${localStorage.getItem("token")}`,
-				},
-			});
+			const res = await axios.delete(`/api/post/like/${id}`);
 
-			await axios.delete(`/api/user/like/${id}`, {
-				headers: {
-					Authorization: `${localStorage.getItem("token")}`,
-				},
-			});
+			await axios.delete(`/api/user/like/${id}`);
 
 			dispatch({
 				type: UNLIKE_POST,
-				payload: updatedPost,
+				payload: res.data,
 			});
 		} catch (err) {
 			console.log(err);
@@ -195,7 +172,6 @@ const PostState = (props) => {
 				{
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: `${localStorage.getItem("token")}`,
 					},
 				}
 			);

@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./app.css";
+import axios from 'axios';
 import { Switch, Route } from "react-router";
 
 import Home from "./pages/Home";
@@ -13,6 +14,14 @@ import Navbar from "./components/Navbar";
 import AuthState from "./context/auth/AuthState";
 import PostState from "./context/post/PostState";
 import NewPost from "./pages/NewPost";
+
+const token = localStorage.token;
+
+if (token) {
+	axios.defaults.headers.common['Authorization'] = token;
+} else {
+	delete axios.defaults.headers.common['Authorization'];
+}
 
 function App() {
 	return (
