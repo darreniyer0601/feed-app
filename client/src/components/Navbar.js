@@ -33,9 +33,9 @@ const Navbar = () => {
 		<header>
 			<nav className="navbar navbar-expand w-100 navbar-light bg-light">
 				<a className="navbar-brand m-2" href="/">
-					<h3><strong>Feed App</strong></h3>
+					<h3><strong>The Writer's Circle</strong></h3>
 				</a>
-				<ul className="navbar-nav">
+				<ul className="navbar-nav me-auto">
 					{authContext.authenticated && (
 						<Fragment>
 							<li className="nav-item">
@@ -56,7 +56,7 @@ const Navbar = () => {
 						</Fragment>
 					)}
 				</ul>
-				<div className="float-right">
+				<div className="mr-2">
 					<ul className="navbar-nav">
 						{authContext.authenticated ? logoutLink : authLinks}
 					</ul>
