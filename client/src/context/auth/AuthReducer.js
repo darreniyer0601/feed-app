@@ -18,6 +18,7 @@ const AuthReducer = (state, action)  => {
         case USER_LOADED:
             return {
                 ...state,
+                authenticated: true,
                 user: action.payload
             }
         case AUTH_FAIL:

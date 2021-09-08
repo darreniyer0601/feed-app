@@ -1,4 +1,4 @@
-import { useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 import axios from 'axios';
 
 import AuthContext from './AuthContext';
@@ -8,11 +8,16 @@ import { AUTH_FAIL, AUTH_SUCCESS, LOGOUT, USER_LOADED } from '../types';
 const initialState = {
     authenticated: false,
     user: null,
-    token: null
+    token: localStorage.getItem('token')
 };
 
 const AuthState = (props) => {
     const [state, dispatch] = useReducer(AuthReducer, initialState);
+
+    useEffect(() => {
+        loadUser();
+        //eslint-disable-next-line
+    }, []);
 
     // Login user
     const login = async (user) => {
@@ -29,7 +34,7 @@ const AuthState = (props) => {
                 payload: res.data
             })
 
-            loadUser();
+            await loadUser();
         } catch (err) {
             dispatch({
                 type: AUTH_FAIL
@@ -53,7 +58,7 @@ const AuthState = (props) => {
                 payload: res.data
             })
 
-            loadUser();
+            await loadUser();
         } catch (err) {
             dispatch({
                 type: AUTH_FAIL
@@ -79,11 +84,13 @@ const AuthState = (props) => {
             dispatch({
                 type: AUTH_FAIL
             })
+            console.log(err);
         }
     }
 
     // Logout user
     const logout = () => {
+        delete axios.defaults.headers.common['Authorization'];
         dispatch({
             type: LOGOUT
         })

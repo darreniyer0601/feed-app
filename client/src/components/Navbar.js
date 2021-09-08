@@ -6,9 +6,13 @@ import AuthContext from "../context/auth/AuthContext";
 const Navbar = () => {
 	const authContext = useContext(AuthContext);
 
+	const handleLogout = () => {
+		authContext.logout();
+	}
+
 	const logoutLink = (
 		<li className="nav-item">
-			<a className="nav-link" href="/logout">
+			<a className="nav-link" href="/" onClick={handleLogout}>
 				Logout
 			</a>
 		</li>
@@ -43,11 +47,11 @@ const Navbar = () => {
 									Home
 								</NavLink>
 							</li>
-							<li className="nav-item">
+							{/* <li className="nav-item">
 								<NavLink className="nav-link" exact to="/profile">
 									Profile
 								</NavLink>
-							</li>
+							</li> */}
 							<li className="nav-item">
 								<NavLink className="nav-link" exact to="/new-post">
 									New Post
